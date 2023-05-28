@@ -1,58 +1,44 @@
 package mirea.artemtask.Controllers.dto;
 
-import lombok.Data;
-import mirea.artemtask.Entities.Role;
-
-@Data
 public class UserRegistrationDTO {
-
-    private String firstName;
-
-    private String lastName;
-
-    private String middleName;
-
     private String username;
-
-    private String number;
-
+    private String email;
     private String password;
 
+    // Constructors, getters, and setters
 
+    public UserRegistrationDTO() {
+    }
 
-    public UserRegistrationDTO(){}
-
-    public UserRegistrationDTO(String firstName, String lastName, String middleName, String username, String number) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
+    public UserRegistrationDTO(String username, String email, String password) {
         this.username = username;
-        this.number = number;
+        this.email = email;
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
+    // Getters and setters
 
     public String getUsername() {
         return username;
     }
 
-    public String getNumber() {
-        return number;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

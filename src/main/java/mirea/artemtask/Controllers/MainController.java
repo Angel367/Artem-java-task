@@ -20,7 +20,7 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model m) {
-        m.addAttribute("user", userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
+        //m.addAttribute("user", userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
         return "index";
     }
 

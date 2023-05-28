@@ -36,10 +36,10 @@ public class LKController {
 
         authentication = SecurityContextHolder.getContext().getAuthentication();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName());
-        List<Tour> list = tourRepository.findAllByUserId(user.getId());
+        //User user = userRepository.findByEmail(authentication.getName());
+      //  List<Tour> list = tourRepository.findAllByUserId(user.getId());
 
-        model.addAttribute("records", list);
+       // model.addAttribute("records", list);
 
         return "lk";
     }
