@@ -188,3 +188,6 @@ Homework for Artem Java
         "updatedAt": "2023-05-29T07:16:16.6638278"
         }
         ```
+      
+### Коллекция PostMan
+https://www.postman.com/angel367/workspace/d26e9361-f72d-4cf5-8d11-50801fe29931/share?collection=27190491-d4c0d900-1b1b-4859-86f1-41bcd72741c7&target=link
