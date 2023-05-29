@@ -9,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.regex.Pattern;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -32,10 +36,20 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
         }
 
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern emailPattern = Pattern.compile(emailRegex);
+        if (!emailPattern.matcher(registrationDTO.getEmail()).matches()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email format");
+        }
+
         User newUser = new User();
         newUser.setUsername(registrationDTO.getUsername());
         newUser.setEmail(registrationDTO.getEmail());
         newUser.setPasswordHash(passwordEncoder.encode(registrationDTO.getPassword()));
+        LocalDateTime now = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(now);
+        newUser.setCreatedAt(timestamp);
+        newUser.setUpdatedAt(timestamp);
         newUser.setRole("customer"); // or set the desired role
 
         userRepository.save(newUser);
