@@ -46,11 +46,11 @@ public class UserController {
         newUser.setUsername(registrationDTO.getUsername());
         newUser.setEmail(registrationDTO.getEmail());
         newUser.setPasswordHash(passwordEncoder.encode(registrationDTO.getPassword()));
+        newUser.setRole(registrationDTO.getRole());
         LocalDateTime now = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(now);
         newUser.setCreatedAt(timestamp);
         newUser.setUpdatedAt(timestamp);
-        newUser.setRole("customer"); // or set the desired role
 
         userRepository.save(newUser);
 

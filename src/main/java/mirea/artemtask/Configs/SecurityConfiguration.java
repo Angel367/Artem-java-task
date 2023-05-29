@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Configure security settings, such as authentication requirements and authorization rules
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/**", "/orders/**").permitAll()
+                .antMatchers("/api/**", "/orders/**", "/dishes/**").permitAll()
                 .anyRequest().authenticated();
     }
 

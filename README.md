@@ -55,7 +55,7 @@ Homework for Artem Java
 - Content-Type: `application/json`
   - Тело запроса:
   json
-  - ```
+  - ```json
     {
     "username": "john.doe",
     "password": "password123"
@@ -64,11 +64,11 @@ Homework for Artem Java
  - Ответ:
    - Код состояния: 200 OK
    - Тело ответа:
-```json
-{
-"token": "<JWT Токен>"
-}
-```
+    ```json
+    {
+    "token": "<JWT Токен>"
+    }
+    ```
 ## Получение профиля пользователя
 ### Получение информации о профиле пользователя.
 
@@ -79,89 +79,112 @@ Homework for Artem Java
  - Ответ:
    - Код состояния: 200 OK 
    - Тело ответа:
-```json
-{
-"id": 1,
-"username": "john.doe",
-"email": "john.doe@example.com",
-"role": "customer"
-}
-```
+    ```json
+    {
+    "id": 1,
+    "username": "john.doe",
+    "email": "john.doe@example.com",
+    "role": "customer"
+    }
+    ```
 ## Создание заказа
 ### Создание нового заказа.
 
-URL: /api/orders
-Метод: POST
-Заголовки:
-Authorization: Bearer <JWT Токен>
-Content-Type: application/json
-Тело запроса:
-json
+- URL: /api/orders
+- Метод: POST
+- Заголовки:
+  - Authorization: `Bearer <JWT Токен>`
+  - Content-Type: `application/json`
+- Тело запроса:
+    ```json
+    
+    {
+    "status": "Pending",
+    "specialRequests": "Extra cheese"
+    }
+    ```
+- Ответ:
+  - Код состояния: 201 Created
+  - Тело ответа:
+    ```json
+    {
+    "id": 1,
+    "status": "Pending"
+    }
+    ```
+## Получение заказа по идентификатору
+### Получение информации о заказе по идентификатору.
 
-{
-"status": "Pending",
-"specialRequests": "Extra cheese"
-}
-Ответ:
-Код состояния: 201 Created
-Тело ответа:
-json
-
-{
-"id": 1,
-"status": "Pending"
-}
-Получение заказа по идентификатору
-Получение информации о заказе по идентификатору.
-
-URL: /api/orders/{orderId}
-Метод: GET
-Заголовки:
-Authorization: Bearer <JWT Токен>
-Ответ:
-Код состояния: 200 OK
-Тело ответа:
-json
-
-{
-"id": 1,
-"status": "Pending"
-}
-Создание блюда
-Создание нового блюда.
-
-URL: /api/dishes
-Метод: POST
-Заголовки:
-Authorization: Bearer <JWT Токен>
-Content-Type: application/json
-Тело запроса:
-json
-
-{
-"name": "Пицца",
-"description": "Вкусная пицца с различными топпингами.",
-"price": 12.99,
-"quantity": 10,
-"available": true
-}
-Ответ:
-Код состояния: 201 Created
-Тело ответа:
-json
-
-{
-"id": 1,
-"name": "Пицца",
-"description": "Вкусная пицца с различными топпингами.",
-"price": 12.99,
-"quantity": 10,
-"available": true
-}
-Обновление блюда
-Обновление существующего блюда.
-
-URL: /api/dishes/{dishId}
-Метод: PUT
-Заголовки:
-`Authorization: Bearer <JWT Токен
+- URL: /api/orders/{orderId}
+- Метод: GET
+- Заголовки:
+ - Authorization: `Bearer <JWT Токен>`
+- Ответ:
+   - Код состояния: 200 OK
+   - Тело ответа:
+    ```json
+    {
+    "id": 1,
+    "status": "Pending"
+    }
+    ```
+## Блюда
+### Создание нового блюда.
+- URL: /api/dishes
+- Метод: POST
+  - Заголовки:
+   - Authorization: `Bearer <JWT Токен>`
+   - Content-Type: `application/json`
+- Тело запроса:
+    ```json
+    {
+    "name": "Пицца",
+    "description": "Вкусная пицца с различными топпингами.",
+    "price": 12.99,
+    "quantity": 10,
+    "available": true
+    }
+    ```
+- Ответ:
+   - Код состояния: 201 Created
+   - Тело ответа:
+        ```json
+        {
+        "id": 1,
+        "name": "Пицца",
+        "description": "Вкусная пицца с различными топпингами.",
+        "price": 12.99,
+        "quantity": 10,
+        "available": true
+        }
+        ```
+### Удаление блюда.
+- URL: /api/dishes/{id}
+- Метод: DELETE
+    - Заголовки:
+    - Authorization: `Bearer <JWT Токен>`
+    - Content-Type: `application/json`
+- Ответ:
+    - Код состояния: 200 Ok
+    - Тело ответа:
+      `deleted successfully`
+### Просмотр информации о блюде
+- URL: dishes/{id}
+- Метод: GET
+    - Заголовки:
+    - Content-Type: `application/json`
+- Ответ:
+    - Код состояния: 200 Ok
+    - Тело ответа:
+        ```json
+        {
+        "id": 1,
+        "name": "Пицца",
+        "description": "Вкусная пицца с различными топпингами.",
+        "price": 12.99,
+        "quantity": 10,
+        "available": true,
+        "createdAt": "2023-05-29T07:16:16.6638278",
+        "updatedAt": "2023-05-29T07:16:16.6638278"
+        }
+        ```

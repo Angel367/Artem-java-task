@@ -93,7 +93,7 @@ public class AuthenticationController {
 
             return ResponseEntity.ok("email:" + user.getEmail() +
                                     "\nusername: " + user.getUsername() +
-                                    "\nRole" + user.getRole());
+                                    "\nRole: " + user.getRole());
         } catch (JwtException | EntityNotFoundException e) {
             log.info(e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
