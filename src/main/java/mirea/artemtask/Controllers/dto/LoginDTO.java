@@ -14,7 +14,7 @@ public class LoginDTO {
         return email;
     }
 
-    public void setEsername(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

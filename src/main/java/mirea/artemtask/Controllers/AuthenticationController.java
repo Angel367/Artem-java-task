@@ -99,6 +99,36 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
     }
+    public User getUserByToken(String token) {
+        token = token.substring(7); // Remove "Bearer " prefix
+
+        try {
+            // Validate and parse the JWT token
+            Jws<Claims> claims = Jwts.parserBuilder()
+                    .setSigningKey(jwtSecretKey)
+                    .build()
+                    .parseClaimsJws(token);
+
+            // Retrieve the session from the database
+            Session session = sessionRepository.findBySessionToken(token)
+                    .orElseThrow(EntityNotFoundException::new);
+
+            // Check if the token is expired
+            if (claims.getBody().getExpiration().before(new Date())) {
+                // Handle expired token
+                return null;
+            }
+
+            // Get the user details from the session
+            User user = userRepository.findById(session.getId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            return user;
+        } catch (JwtException | EntityNotFoundException e) {
+            log.info(e.getMessage());
+            return null;
+        }
+    }
 
     private String generateJwtToken(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
